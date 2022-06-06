@@ -1,0 +1,22 @@
+.win_tab{
+    display: flex;
+    position: fixed;
+    width: 200px;
+    height: 70px;
+    z-index: 10000;
+    transition: 0.3s ease;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: 400;
+    background-color: black;
+    top: 90%;
+    left: 88%;
+    transform: translateX(210px);
+    &.active {
+        transform: translateX(0);
+    }
+  }

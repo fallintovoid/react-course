@@ -1,0 +1,49 @@
+.bet_team_one{
+    background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+    border-right: solid black 4px;
+    .bet_team_one_co{
+        font-size: 2rem;
+    }
+    .bet_team_one_name{
+        font-size: 3rem;
+        font-weight: 700;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+    &:hover .bet_team_one_name{
+        font-size: 3.2rem;
+    }
+    &.active .bet_team_one_in{
+        display: flex;
+        opacity: 1;
+    }
+    &.active .bet_team_one_butt{
+        display: flex;
+        opacity: 1;
+    }
+    &.active .bet_team_one_name{
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    &.active .bet_team_one_co{
+        display: none;
+    }
+    .bet_team_one_butt{
+        width: 90px;
+        height: 25px;
+        background-color: #7AFD6A;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        margin-top: 10px;
+        transition: 0.3s ease;
+        display: none;
+        &:hover{
+            background: #FDAB6A;
+            border: 0;
+            color: white;
+            cursor: pointer;
+        }
+    }
+}

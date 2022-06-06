@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+.bet-list-item {
+    width: 80%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    .bet_team_one, .bet_team_two{
+        position: relative;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Lato', sans-serif;
+    }
+    input[type=text]{
+        padding:10px;
+        border-radius: 10px;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        transition: 0.2s;
+        display: none;
+        opacity: 0;
+        width: 200px;
+        height: 40px;
+        border: 2px #6D1FFF solid;
+    }
+    input[type=text]::placeholder{
+        color: #434446;
+        font-size: 1.2rem;
+    }
+    input[type=text]:focus{
+        outline: none;
+    }
+}
