@@ -11,7 +11,7 @@ import './app.scss'
 class App extends Component{
     constructor(props){
         super(props);
-        this.maxid = 2;
+        this.maxid = 1;
         this.state = {
             data: [
                 {
@@ -27,7 +27,7 @@ class App extends Component{
                 }
             ],
             userMoney: 6000,
-            winActive: false,
+            winType: '',
             addActive: false
         }
     }
@@ -62,15 +62,37 @@ class App extends Component{
 
     showWinTab = (type, amount) => {
         if (type === 'win'){
-            this.setState(({winActive})=> ({
-                winActive: !winActive
-            }))
+            this.setState({
+                winType: `win +${amount}`
+            })
             setTimeout(()=>{
-                this.setState(({winActive})=> ({
-                    winActive: !winActive
-                }))
+                this.setState({
+                    winType: ''
+                })
             }, 2000)
         } 
+
+        else if (type === 'lose'){
+            this.setState({
+                winType: `lose -${amount}`
+            })
+            setTimeout(()=>{
+                this.setState({
+                    winType: ''
+                })
+            }, 2000)
+        } 
+
+        else if (type === 'error') {
+            this.setState({
+                winType: 'didn`t fill the gaps'
+            })
+            setTimeout(()=>{
+                this.setState({
+                    winType: ''
+                })
+            }, 2000)
+        }
     }
 
     getRandomInt = (limit) => {
@@ -85,15 +107,18 @@ class App extends Component{
         }
         setTimeout(()=>{
             if (this.getRandomInt(3) === team){
-                this.setState(({userMoney})=> ({
-                    userMoney: userMoney + betMoney * co,
-                }))
-                this.showWinTab('win')
+                this.setState(({userMoney})=> {
+                    let amount = betMoney * co
+                    this.showWinTab('win', amount)
+                    return {userMoney: userMoney + amount}
+                })
+                
             } else if (this.getRandomInt(3) !== team){
-                this.setState(({userMoney})=> ({
-                    userMoney: userMoney - betMoney,
-                }))
-                this.showWinTab('win')
+                this.setState(({userMoney})=> {
+                    let amount = betMoney
+                    this.showWinTab('lose', amount)
+                    return {userMoney: userMoney - amount}
+                })
             }
             this.setState(({data})=> ({
                 data: data.filter(item => item.id !== id)
@@ -112,22 +137,40 @@ class App extends Component{
         this.setState({addActive: false})
     }
 
-    onMakeObj = () => {
-        
+    onMakeObj = (firstTeamName, coFirstTeam, secondTeamName, coSecondTeam) => {
+        if (!firstTeamName || !coFirstTeam || !secondTeamName || !coSecondTeam) {
+            this.showWinTab('error');
+            return
+        }
+        let newItem = {
+            teamOne: firstTeamName,
+            teamTwo: secondTeamName,
+            coOne: coFirstTeam,
+            coTwo: coSecondTeam,
+            active: {
+                one: false,
+                two: false
+            },
+            id: this.maxid++
+        }
+        this.setState(({data})=>({
+            data: [...data, newItem]
+        }))
+        this.onChangeAdd();
     }
 
     render() {
-        const {data, userMoney, winActive, addActive} = this.state
+        const {data, userMoney, winType, addActive} = this.state
 
         const winActiveRender = 
             addActive 
-            ? <AddWindow/> 
+            ? <AddWindow 
+                onMakeObj = {this.onMakeObj}/> 
             : <BetList 
                 data = {data} 
                 onOneActive = {this.oneActive} 
                 onTwoActive = {this.twoActive} 
                 findWinTeam = {this.findWinTeam}/>
-
         return (
             <div className="App">
                 <Header
@@ -135,8 +178,7 @@ class App extends Component{
                     onChangeAdd = {this.onChangeAdd}
                     onFalseAdd = {this.onFalseAdd}/>
                 {winActiveRender}
-                <WinTab
-                    winActive = {winActive}/>
+                <WinTab winType = {winType}/>
             </div>
         )
     }

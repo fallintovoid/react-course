@@ -5,10 +5,10 @@ import './add-window.scss'
 class AddWindow extends Component{
 
     state = {
-        firstTeamName: null,
-        coFirstTeam: null,
-        secondTeamName: null,
-        coSecondTeam: null
+        firstTeamName: '',
+        coFirstTeam: '',
+        secondTeamName: '',
+        coSecondTeam: ''
     }
 
     connectInput = (e) => {
@@ -18,39 +18,51 @@ class AddWindow extends Component{
     }
 
     render() {
+        const {firstTeamName, coFirstTeam, secondTeamName, coSecondTeam} = this.state;
+        const {onMakeObj} = this.props;
+
         return(
             <div className="container_add">
                 <div className="add_tab">
-                    <form>
+                    <form
+                       >
                         <input 
                             type="text" 
                             name="firstTeamName" 
                             className="input_teamone" 
                             placeholder="team one"
-                            onChange = {this.connectInput}>
+                            onChange = {this.connectInput}
+                            value = {firstTeamName}>
                         </input>
                         <input 
                             type="text" 
                             name="secondTeamName" 
                             className="input_teamtwo" 
                             placeholder="team two"
-                            onChange = {this.connectInput}>
+                            onChange = {this.connectInput}
+                            value = {secondTeamName}>
                         </input>
                         <input 
                             type="text" 
                             name="coFirstTeam" 
                             className="input_coone" 
                             placeholder="co one"
-                            onChange = {this.connectInput}>
+                            onChange = {this.connectInput}
+                            value = {coFirstTeam}>
                         </input>
                         <input 
                             type="text"
                             name="coSecondTeam" 
                             className="input_cotwo" 
                             placeholder="co two"
-                            onChange = {this.connectInput}>
+                            onChange = {this.connectInput}
+                            value = {coSecondTeam}>
                         </input>
-                        <div className="add_button" type="submit"><p>ADD</p></div>
+                        <div 
+                            className="add_button"  
+                            onClick = {() => onMakeObj(firstTeamName, coFirstTeam, secondTeamName, coSecondTeam)}>
+                                <p>ADD</p>
+                        </div>
                     </form>
                     
                 </div>

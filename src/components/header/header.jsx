@@ -22,7 +22,7 @@ class Header extends Component{
                         </Nav>
                         <Navbar.Collapse className="justify-content-end">
                             <Navbar.Text>
-                                {userMoney}
+                                Your balance: {userMoney}
                             </Navbar.Text>
                         </Navbar.Collapse>
                     </Container>

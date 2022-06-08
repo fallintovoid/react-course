@@ -4,15 +4,15 @@ import "./win-tab.scss";
 
 class WinTab extends Component{
     render (){
-        const {winActive, betText} = this.props;
+        const {winType} = this.props;
         let classes = "win_tab"
-        if (winActive) {
+        if (winType) {
             classes += ' active';
         }
 
         return (
             <div className={classes}>
-                {betText}
+                {`You ${winType}`}
             </div>
         )
     }
