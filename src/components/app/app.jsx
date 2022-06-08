@@ -3,7 +3,7 @@ import { Component } from "react";
 import Header from "../header/header";
 import BetList from "../bet-list/bet-list";
 import WinTab from "../win-tab/win-tab";
-import AddForm from "../add-form/add-form";
+import AddWindow from "../add-window/add-window";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.scss'
@@ -24,22 +24,11 @@ class App extends Component{
                         two: false
                     },
                     id: 0
-                },
-                {
-                    teamOne: 'Astralis',
-                    teamTwo: 'Vitality',
-                    coOne: 2.3,
-                    coTwo: 1.4,
-                    active: {
-                        one: false,
-                        two: false
-                    },
-                    id: 1
                 }
             ],
             userMoney: 6000,
             winActive: false,
-            betText: ''
+            addActive: false
         }
     }
 
@@ -98,13 +87,11 @@ class App extends Component{
             if (this.getRandomInt(3) === team){
                 this.setState(({userMoney})=> ({
                     userMoney: userMoney + betMoney * co,
-                    betText: `You won +${betMoney * co}`
                 }))
                 this.showWinTab('win')
             } else if (this.getRandomInt(3) !== team){
                 this.setState(({userMoney})=> ({
                     userMoney: userMoney - betMoney,
-                    betText: `You lose -${betMoney}`
                 }))
                 this.showWinTab('win')
             }
@@ -115,39 +102,41 @@ class App extends Component{
         
     }
 
-    addItem = (teamOne, teamTwo, coOne, coTwo) => {
-        const newObj = {
-            teamOne: teamOne,
-            teamTwo: teamTwo,
-            coOne: coOne,
-            coTwo: coTwo,
-            active: {
-                one: false,
-                two: false
-            },
-            id: this.maxid++
-        }
-        this.setState(({data}) => ({
-            data: [...data, newObj]
+    onChangeAdd = () => {
+        this.setState(({addActive})=> ({
+            addActive: !addActive
         }))
     }
 
+    onFalseAdd = () => {
+        this.setState({addActive: false})
+    }
+
+    onMakeObj = () => {
+        
+    }
+
     render() {
-        const {data, userMoney, winActive, betText} = this.state
+        const {data, userMoney, winActive, addActive} = this.state
+
+        const winActiveRender = 
+            addActive 
+            ? <AddWindow/> 
+            : <BetList 
+                data = {data} 
+                onOneActive = {this.oneActive} 
+                onTwoActive = {this.twoActive} 
+                findWinTeam = {this.findWinTeam}/>
+
         return (
             <div className="App">
                 <Header
-                    userMoney = {userMoney}/>
-                <BetList 
-                    data = {data}
-                    onOneActive = {this.oneActive}
-                    onTwoActive = {this.twoActive}
-                    findWinTeam = {this.findWinTeam}/>
+                    userMoney = {userMoney}
+                    onChangeAdd = {this.onChangeAdd}
+                    onFalseAdd = {this.onFalseAdd}/>
+                {winActiveRender}
                 <WinTab
-                    winActive = {winActive}
-                    betText = {betText}/>
-                <AddForm
-                    onAdd = {this.addItem}/>
+                    winActive = {winActive}/>
             </div>
         )
     }
