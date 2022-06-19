@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/pari-react/static/css/main.d71e3fb7.css",
-    "main.js": "/pari-react/static/js/main.fe19a5ca.js",
-    "index.html": "/pari-react/index.html",
-    "main.d71e3fb7.css.map": "/pari-react/static/css/main.d71e3fb7.css.map",
-    "main.fe19a5ca.js.map": "/pari-react/static/js/main.fe19a5ca.js.map"
+    "main.css": "/react-course/static/css/main.d71e3fb7.css",
+    "main.js": "/react-course/static/js/main.312fdd81.js",
+    "index.html": "/react-course/index.html",
+    "main.d71e3fb7.css.map": "/react-course/static/css/main.d71e3fb7.css.map",
+    "main.312fdd81.js.map": "/react-course/static/js/main.312fdd81.js.map"
   },
   "entrypoints": [
     "static/css/main.d71e3fb7.css",
-    "static/js/main.fe19a5ca.js"
+    "static/js/main.312fdd81.js"
   ]
 }
