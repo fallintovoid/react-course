@@ -58,7 +58,7 @@ const App = () => {
                 <Header
                     userMoney = {userMoney}/>
                 <Routes>
-                    <Route path='/' element={<MainPage 
+                    <Route path='/react-course' element={<MainPage 
                         setUserMoney={setUserMoney} 
                         data ={data} 
                         setData = {setData}

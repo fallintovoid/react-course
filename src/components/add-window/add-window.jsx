@@ -93,7 +93,7 @@ const AddWindow = ({makeObj, setWinText}) => {
                     <div 
                         className="add_button"  
                         onClick = {() => {makeObj(firstName, secondName, firstCo, secondCo, time, date, srcOne, srcTwo)}}>
-                            <Link to="/" style={{'textDecoration' : 'none', 'color' : 'black'} }><p>ADD</p></Link>
+                            <Link to="/react-course" style={{'textDecoration' : 'none', 'color' : 'black'} }><p>ADD</p></Link>
                     </div>
                 </form>
             </div>
