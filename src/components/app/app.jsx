@@ -1,187 +1,78 @@
-import { Component } from "react";
-
 import Header from "../header/header";
-import BetList from "../bet-list/bet-list";
-import WinTab from "../win-tab/win-tab";
 import AddWindow from "../add-window/add-window";
+import MainPage from "../pages/main-page";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.scss'
+import { useState } from "react";
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import WinTab from "../win-tab/win-tab";
 
-class App extends Component{
-    constructor(props){
-        super(props);
-        this.maxid = 1;
-        this.state = {
-            data: [
-                {
-                    teamOne: 'Astralis',
-                    teamTwo: 'Vitality',
-                    coOne: 2,
-                    coTwo: 1.4,
-                    active: {
-                        one: false,
-                        two: false
-                    },
-                    id: 0
-                }
-            ],
-            userMoney: 6000,
-            winType: '',
-            addActive: false
+const App = () => {
+    const [userMoney, setUserMoney] = useState(6000);
+    const [maxId, setMaxId] = useState(1);
+    const [winText, setWinText] = useState('');
+    const [data, setData] = useState([
+        {
+            firstTeamName: 'Navi',
+            secondTeamName: 'OG',
+            firstCo: 2,
+            secondCo: 1.4,
+            time: `18:30`,
+            date: `21.06.22`,
+            srcOne: 'https://d3dwep9z8m8y9r.cloudfront.net/publications/2022/06/publications-9749/preview/28598/548.jpg',
+            srcTwo: 'https://pbs.twimg.com/profile_images/1516719305777426433/2xSX0HN7_400x400.jpg',
+            id: 0
         }
-    }
+    ])
 
-    oneActive = (id) => {
-        this.setState(({data}) => ({
-            data: data.map(item => {
-                if (item.id === id){
-                    if (item.active.two){
-                        return {...item, active: {one: !item.active.one, two: false}}
-                    }
-                    return {...item, active: {...item.active, one: !item.active.one}}
-                }
-                return item;
-            })
-        }))
-    }
-
-    twoActive = (id) => {
-        this.setState(({data}) => ({
-            data: data.map(item => {
-                if (item.id === id){
-                    if (item.active.one){
-                        return {...item, active: {two: !item.active.two, one: false}}
-                    }
-                    return {...item, active: {...item.active, two: !item.active.two}}
-                }
-                return item;
-            })
-        }))
-    }
-
-    showWinTab = (type, amount) => {
-        if (type === 'win'){
-            this.setState({
-                winType: `win +${amount}`
-            })
-            setTimeout(()=>{
-                this.setState({
-                    winType: ''
-                })
+    const makeObj = (firstTeamName, secondTeamName, firstCo, secondCo, 
+        time, date, srcOne, srcTwo) => {
+        if ((firstTeamName.length === 0 || secondTeamName.length === 0 || srcOne.length === 0 || srcTwo.length === 0 || !date.includes('.') || !time.includes(':') || (firstCo.toUpperCase() !== firstCo.toLowerCase() || firstCo.includes(',')) || (secondCo.toLowerCase() !== secondCo.toUpperCase() || secondCo.includes(',')))) {
+            console.log('TRIED')
+            setWinText('Error!')
+            setTimeout(() => {
+                setWinText('')
             }, 2000)
-        } 
-
-        else if (type === 'lose'){
-            this.setState({
-                winType: `lose -${amount}`
-            })
-            setTimeout(()=>{
-                this.setState({
-                    winType: ''
-                })
-            }, 2000)
-        } 
-
-        else if (type === 'error') {
-            this.setState({
-                winType: 'didn`t fill the gaps'
-            })
-            setTimeout(()=>{
-                this.setState({
-                    winType: ''
-                })
-            }, 2000)
-        }
-    }
-
-    getRandomInt = (limit) => {
-        return Math.floor(Math.random() * limit)
-    }
-
-    findWinTeam = (team, betMoney, co, id) => {
-        if (team === 1){
-            this.oneActive(id)
         } else {
-            this.twoActive(id)
-        }
-        setTimeout(()=>{
-            if (this.getRandomInt(3) === team){
-                this.setState(({userMoney})=> {
-                    let amount = betMoney * co
-                    this.showWinTab('win', amount)
-                    return {userMoney: userMoney + amount}
-                })
-                
-            } else if (this.getRandomInt(3) !== team){
-                this.setState(({userMoney})=> {
-                    let amount = betMoney
-                    this.showWinTab('lose', amount)
-                    return {userMoney: userMoney - amount}
-                })
+            setMaxId(maxId => maxId + 1)
+            let newObj = {
+                firstTeamName,
+                secondTeamName,
+                firstCo,
+                secondCo,
+                time,
+                date,
+                srcOne,
+                srcTwo,
+                id: maxId
             }
-            this.setState(({data})=> ({
-                data: data.filter(item => item.id !== id)
-            }))
-        }, 1500)
+            setData(date => [...date, newObj])
+        }
         
     }
 
-    onChangeAdd = () => {
-        this.setState(({addActive})=> ({
-            addActive: !addActive
-        }))
-    }
-
-    onFalseAdd = () => {
-        this.setState({addActive: false})
-    }
-
-    onMakeObj = (firstTeamName, coFirstTeam, secondTeamName, coSecondTeam) => {
-        if (!firstTeamName || !coFirstTeam || !secondTeamName || !coSecondTeam) {
-            this.showWinTab('error');
-            return
-        }
-        let newItem = {
-            teamOne: firstTeamName,
-            teamTwo: secondTeamName,
-            coOne: coFirstTeam,
-            coTwo: coSecondTeam,
-            active: {
-                one: false,
-                two: false
-            },
-            id: this.maxid++
-        }
-        this.setState(({data})=>({
-            data: [...data, newItem]
-        }))
-        this.onChangeAdd();
-    }
-
-    render() {
-        const {data, userMoney, winType, addActive} = this.state
-
-        const winActiveRender = 
-            addActive 
-            ? <AddWindow 
-                onMakeObj = {this.onMakeObj}/> 
-            : <BetList 
-                data = {data} 
-                onOneActive = {this.oneActive} 
-                onTwoActive = {this.twoActive} 
-                findWinTeam = {this.findWinTeam}/>
-        return (
+    return (
+        <BrowserRouter>
             <div className="App">
                 <Header
-                    userMoney = {userMoney}
-                    onChangeAdd = {this.onChangeAdd}
-                    onFalseAdd = {this.onFalseAdd}/>
-                {winActiveRender}
-                <WinTab winType = {winType}/>
+                    userMoney = {userMoney}/>
+                <Routes>
+                    <Route path='/' element={<MainPage 
+                        setUserMoney={setUserMoney} 
+                        data ={data} 
+                        setData = {setData}
+                        setWinText = {setWinText}
+                        userMoney = {userMoney}/>}/>
+                    <Route path='/add' element={<AddWindow 
+                        makeObj = {makeObj}
+                        setWinText = {setWinText}/>}/>
+                </Routes>
+                <WinTab winText={winText}/>
             </div>
-        )
-    }
+        </BrowserRouter>
+        
+    )
 }
 
 export default App;

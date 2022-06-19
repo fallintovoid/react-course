@@ -1,30 +1,35 @@
-import { Component } from "react";
-
 import BetListItem from "../bet-list-item/bet-list-item";
 
 import './bet-list.scss';
 
-class BetList extends Component{
-    render () {
-        const {data, onOneActive, onTwoActive, findWinTeam} = this.props
-        const items = data.map(item => (<BetListItem 
-                                            teamOne = {item.teamOne}
-                                            teamTwo = {item.teamTwo}
-                                            coOne = {item.coOne}
-                                            coTwo = {item.coTwo}
-                                            active = {item.active}
-                                            onOneActive = {() => onOneActive(item.id)}
-                                            onTwoActive = {() => onTwoActive(item.id)}
-                                            findWinTeam = {findWinTeam}
-                                            key = {item.id}
-                                            id = {item.id}/>
-                                            
-                                        ))
-        return (
-            <div className="bet-list">
-                {items}
-            </div>
-        )
-    }
+const BetList = ({data, openBetWindow}) => {
+    const bets = data.map((
+        {firstTeamName, 
+        secondTeamName, 
+        firstCo, 
+        secondCo, 
+        srcOne, 
+        srcTwo,
+        time,
+        date,
+        id}) => {
+         return <BetListItem 
+            firstTeamName = {firstTeamName}
+            secondTeamName = {secondTeamName}
+            firstCo = {firstCo}
+            secondCo = {secondCo}
+            srcOne = {srcOne}
+            srcTwo = {srcTwo}
+            date = {date}
+            time = {time}
+            key = {id}
+            id = {id}
+            openBetWindow = {openBetWindow}/>
+    })
+    return (
+        <div className="bet-list">
+            {bets}
+        </div>
+    )
 }
 export default BetList;
