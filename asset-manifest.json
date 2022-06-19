@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-parimatch/static/css/main.d71e3fb7.css",
+    "main.js": "/react-parimatch/static/js/main.15f2b107.js",
+    "index.html": "/react-parimatch/index.html",
+    "main.d71e3fb7.css.map": "/react-parimatch/static/css/main.d71e3fb7.css.map",
+    "main.15f2b107.js.map": "/react-parimatch/static/js/main.15f2b107.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d71e3fb7.css",
+    "static/js/main.15f2b107.js"
+  ]
+}
