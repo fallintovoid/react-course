@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     .add_tab {
-        width: 80%;
+        width: 100%;
         min-height: 800px;
         display: flex;
         align-items: center;
@@ -15,7 +15,7 @@
             align-items: center;
             input{
                 height: 50px;
-                width: 400px;
+                width: 190%;
                 margin-top: 20px;
             }
             .add_button{

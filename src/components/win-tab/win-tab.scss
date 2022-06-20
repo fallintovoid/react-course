@@ -13,11 +13,14 @@
     font-size: 1.3rem;
     font-weight: 400;
     background-color: black;
-    top: 94%;
+    top: 95%;
     left: 44%;
     transform: translateY(50px);
     text-align: center;
     &.active {
         transform: translateY(-20px);
     }
-  }
+    @media only screen and (max-width: 480px) {
+        left: 30%;
+    }
+}

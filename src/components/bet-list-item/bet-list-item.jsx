@@ -49,7 +49,7 @@ const BetListItem = ({firstTeamName, secondTeamName, firstCo, secondCo, srcOne, 
 }
 
 const CustomButton = styled(Button)`
-    width: 15%;
+    width: 25%;
     height: 80%;
 `
 
