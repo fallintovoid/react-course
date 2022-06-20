@@ -35,7 +35,7 @@ const MainPage = ({setUserMoney, data, setData, setWinText, userMoney}) => {
     const findWonTeam = (id) => {
         if (getRandomInt(2) === 1) {
             setTimeout(() => {
-                setWinText(`You won ${userMoney + betValue * teamCo}`)
+                setWinText(`You won ${betValue * teamCo}`)
                 setUserMoney(money => money + betValue * teamCo);
                 deleteObj(id);
                 setTimeout(() => {
@@ -45,7 +45,7 @@ const MainPage = ({setUserMoney, data, setData, setWinText, userMoney}) => {
             closeBetWindow(false);
         } else {
             setTimeout(() => {
-                setWinText(`You lost ${userMoney - betValue}`)
+                setWinText(`You lost ${betValue}`)
                 setUserMoney(money => money - betValue);
                 deleteObj(id);
                 setTimeout(() => {
