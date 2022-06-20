@@ -7,11 +7,12 @@ import './app.scss'
 import { useState } from "react";
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import WinTab from "../win-tab/win-tab";
+import useWinText from "../../hooks/useWinText";
 
 const App = () => {
     const [userMoney, setUserMoney] = useState(6000);
+    const [winText, setWinText, timeOut] = useWinText('');
     const [maxId, setMaxId] = useState(1);
-    const [winText, setWinText] = useState('');
     const [data, setData] = useState([
         {
             firstTeamName: 'Navi',
@@ -29,11 +30,8 @@ const App = () => {
     const makeObj = (firstTeamName, secondTeamName, firstCo, secondCo, 
         time, date, srcOne, srcTwo) => {
         if ((firstTeamName.length === 0 || secondTeamName.length === 0 || srcOne.length === 0 || srcTwo.length === 0 || !date.includes('.') || !time.includes(':') || (firstCo.toUpperCase() !== firstCo.toLowerCase() || firstCo.includes(',')) || (secondCo.toLowerCase() !== secondCo.toUpperCase() || secondCo.includes(',')))) {
-            console.log('TRIED')
-            setWinText('Error!')
-            setTimeout(() => {
-                setWinText('')
-            }, 2000)
+            setWinText('Error!');
+            timeOut();
         } else {
             setMaxId(maxId => maxId + 1)
             let newObj = {
@@ -63,6 +61,7 @@ const App = () => {
                         data ={data} 
                         setData = {setData}
                         setWinText = {setWinText}
+                        timeout = {timeOut}
                         userMoney = {userMoney}/>}/>
                     <Route path='/add' element={<AddWindow 
                         makeObj = {makeObj}

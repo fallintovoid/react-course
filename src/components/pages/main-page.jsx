@@ -2,10 +2,11 @@ import React from 'react'
 
 import BetList from "../bet-list/bet-list";
 import BetWindow from "../bet-window/bet-window";
+import useWinText  from '../../hooks/useWinText';
 
 import { useState } from "react";
 
-const MainPage = ({setUserMoney, data, setData, setWinText, userMoney}) => {
+const MainPage = ({setUserMoney, data, setData, setWinText, timeout}) => {
     
     const [isBetWindow, setIsBetWindow] = useState(false);
     const [teamName, setTeamName] = useState('');
@@ -33,26 +34,28 @@ const MainPage = ({setUserMoney, data, setData, setWinText, userMoney}) => {
     }
 
     const findWonTeam = (id) => {
-        if (getRandomInt(2) === 1) {
-            setTimeout(() => {
-                setWinText(`You won ${betValue * teamCo}`)
-                setUserMoney(money => money + betValue * teamCo);
-                deleteObj(id);
-                setTimeout(() => {
-                    setWinText('');
-                }, 2000)
-            }, 2000);
-            closeBetWindow(false);
+        if (betValue.length === 0) {
+            setWinText('Error')
+            timeout()
+            closeBetWindow()
         } else {
-            setTimeout(() => {
-                setWinText(`You lost ${betValue}`)
-                setUserMoney(money => money - betValue);
-                deleteObj(id);
+            if (getRandomInt(2) === 1) {
                 setTimeout(() => {
-                    setWinText('');
-                }, 2000)
-            }, 2000);
-            closeBetWindow(false);
+                    setWinText(`You won ${betValue * teamCo}`);
+                    timeout()
+                    setUserMoney(money => money + betValue * teamCo);
+                    deleteObj(id);
+                }, 2000);
+                closeBetWindow();
+            } else {
+                setTimeout(() => {
+                    setWinText(`You lost ${betValue}`);
+                    timeout()
+                    setUserMoney(money => money - betValue);
+                    deleteObj(id);
+                }, 2000);
+                closeBetWindow();
+            }
         }
     }
     return (
@@ -69,8 +72,7 @@ const MainPage = ({setUserMoney, data, setData, setWinText, userMoney}) => {
                     setBetValue = {setBetValue}
                     betValue = {betValue}
                     findWonTeam = {findWonTeam}
-                    id = {id}/> 
-                    
+                    id = {id}/>  
                 : null
             }   
         </>

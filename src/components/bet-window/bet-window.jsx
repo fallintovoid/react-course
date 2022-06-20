@@ -28,6 +28,7 @@ const BetWindow = ({teamName, teamCo, closeBetWindow, setBetValue, betValue, fin
             </InputGroup.Text>
             <Form.Control
                 aria-label="Default"
+                type='number'
                 aria-describedby="inputGroup-sizing-default"
                 onChange={(e) => setBetValue(e.target.value)}
                 value = {betValue}
