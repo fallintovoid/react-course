@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import useInput from '../../hooks/useInput';
+import { InputGroup, Form, Button } from 'react-bootstrap';
+
 import './add-window.scss'
 
-const AddWindow = ({makeObj, setWinText}) => {
-    const [firstName, setFirstName] = useState('');
-    const [secondName, setSecondName] = useState('');
-    const [firstCo, setFirstCo] = useState('');
-    const [secondCo, setSecondCo] = useState('');
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
-    const [srcOne, setSrcOne] = useState('');
-    const [srcTwo, setSrcTwo] = useState('');
+const AddWindow = ({makeObj}) => {
+    const firstName = useInput('');
+    const secondName = useInput('');
+    const firstCo = useInput('');
+    const secondCo = useInput('');
+    const date = useInput('');
+    const time = useInput('');
+    const srcOne = useInput('');
+    const srcTwo = useInput('');
 
     useEffect(() => {
         document.title = 'Add Form';
@@ -19,82 +22,119 @@ const AddWindow = ({makeObj, setWinText}) => {
         }
     }, [])
 
-   
-
     return(
         
         <div className="container_add">
             <div className="add_tab">
                 <form>
-                    <input 
-                        type="text" 
-                        name="firstTeamName" 
-                        className="input_teamone" 
-                        placeholder="team one"
-                        onChange = {(e) => setFirstName(e.target.value)}
-                        value = {firstName}>
-                    </input>
-                    <input 
-                        type="text" 
-                        name="secondTeamName" 
-                        className="input_teamtwo" 
-                        placeholder="team two"
-                        onChange = {(e) => setSecondName(e.target.value)}
-                        value = {secondName}>
-                    </input>
-                    <input 
-                        type="text" 
-                        name="coFirstTeam" 
-                        className="input_coone" 
-                        placeholder="Multiplier of first team"
-                        onChange = {(e) => setFirstCo(e.target.value)}
-                        value = {firstCo}>
-                    </input>
-                    <input 
-                        type="text"
-                        name="coSecondTeam" 
-                        className="input_cotwo" 
-                        placeholder="Multiplier of second team"
-                        onChange = {(e) => setSecondCo(e.target.value)}
-                        value = {secondCo}>
-                    </input>
-                    <input 
-                        type="text"
-                        name="date" 
-                        className="input_cotwo" 
-                        placeholder="Date"
-                        onChange = {(e) => setDate(e.target.value)}
-                        value = {date}>
-                    </input>
-                    <input 
-                        type="text"
-                        name="time" 
-                        className="input_cotwo" 
-                        placeholder="Time"
-                        onChange = {(e) => setTime(e.target.value)}
-                        value = {time}>
-                    </input>
-                    <input 
-                        type="text"
-                        name="srcOne" 
-                        className="input_cotwo" 
-                        placeholder="Image for first team"
-                        onChange = {(e) => setSrcOne(e.target.value)}
-                        value = {srcOne}>
-                    </input>
-                    <input 
-                        type="text"
-                        name="srcTwo" 
-                        className="input_cotwo" 
-                        placeholder="Image for second team"
-                        onChange = {(e) => setSrcTwo(e.target.value)}
-                        value = {srcTwo}>
-                    </input>
-                    <div 
-                        className="add_button"  
-                        onClick = {() => {makeObj(firstName, secondName, firstCo, secondCo, time, date, srcOne, srcTwo)}}>
-                            <Link to="/react-course" style={{'textDecoration' : 'none', 'color' : 'black'} }><p>ADD</p></Link>
-                    </div>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Name of first team
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...firstName}/>
+                    </InputGroup>
+                    {firstName.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Name of second team
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...secondName}/>
+                    </InputGroup>
+                    {secondName.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Multiplier for first team
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...firstCo}/>
+                    </InputGroup>
+                    {firstCo.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Multiplier for second team
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...secondCo}/>
+                    </InputGroup>
+                    {secondCo.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Date
+                        </InputGroup.Text>
+                        <Form.Control
+                            type="date"
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...date}/>
+                    </InputGroup>
+                    {date.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Time
+                        </InputGroup.Text>
+                        <Form.Control
+                            type="time"
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...time}/>
+                    </InputGroup>
+                    {time.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Image for first team
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...srcOne}/>
+                    </InputGroup>
+                    {srcOne.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">
+                            Image fo second team
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            {...srcTwo}/>
+                    </InputGroup>
+                    {srcTwo.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+
+                    <Button     
+                        variant="success"
+                        onClick = {() => {makeObj(firstName.value, 
+                        secondName.value, 
+                        firstCo.value, 
+                        secondCo.value,
+                        time.value, 
+                        date.value, 
+                        srcOne.value, 
+                        srcTwo.value)}}>
+                            <Link 
+                                to="/react-course" 
+                                style={{'textDecoration' : 'none', 
+                                        'color' : 'white',
+                                        'margin': '0'} }>
+                                    <p>ADD</p>
+                            </Link>
+                    </Button>
                 </form>
             </div>
         </div>

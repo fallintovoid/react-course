@@ -20,7 +20,7 @@ const App = () => {
             firstCo: 2,
             secondCo: 1.4,
             time: `18:30`,
-            date: `21.06.22`,
+            date: `21-06-22`,
             srcOne: 'https://d3dwep9z8m8y9r.cloudfront.net/publications/2022/06/publications-9749/preview/28598/548.jpg',
             srcTwo: 'https://pbs.twimg.com/profile_images/1516719305777426433/2xSX0HN7_400x400.jpg',
             id: 0
@@ -29,7 +29,7 @@ const App = () => {
 
     const makeObj = (firstTeamName, secondTeamName, firstCo, secondCo, 
         time, date, srcOne, srcTwo) => {
-        if ((firstTeamName.length === 0 || secondTeamName.length === 0 || srcOne.length === 0 || srcTwo.length === 0 || !date.includes('.') || !time.includes(':') || (firstCo.toUpperCase() !== firstCo.toLowerCase() || firstCo.includes(',')) || (secondCo.toLowerCase() !== secondCo.toUpperCase() || secondCo.includes(',')))) {
+        if ((firstTeamName.length === 0 || secondTeamName.length === 0 || srcOne.length === 0 || srcTwo.length === 0 || (firstCo.toUpperCase() !== firstCo.toLowerCase() || firstCo.includes(',')) || (secondCo.toLowerCase() !== secondCo.toUpperCase() || secondCo.includes(',')))) {
             setWinText('Error!');
             timeOut();
         } else {
