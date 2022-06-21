@@ -1,6 +1,7 @@
 import Header from "../header/header";
 import AddWindow from "../add-window/add-window";
 import MainPage from "../pages/main-page";
+import History from "../pages/history/history";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.scss'
@@ -13,6 +14,7 @@ const App = () => {
     const [userMoney, setUserMoney] = useState(6000);
     const [winText, setWinText, timeOut] = useWinText('');
     const [maxId, setMaxId] = useState(1);
+    const [maxHistoryId, setMaxHistoryId] = useState(1);
     const [data, setData] = useState([
         {
             firstTeamName: 'Navi',
@@ -25,7 +27,16 @@ const App = () => {
             srcTwo: 'https://pbs.twimg.com/profile_images/1516719305777426433/2xSX0HN7_400x400.jpg',
             id: 0
         }
-    ])
+    ]);
+
+    const [history, setHistory] = useState([
+        {
+            teamName: 'Vitality',
+            betAmount: 1000,
+            win: false,
+            id: 0
+        }
+    ]);
 
     const makeObj = (firstTeamName, secondTeamName, firstCo, secondCo, 
         time, date, srcOne, srcTwo) => {
@@ -56,16 +67,28 @@ const App = () => {
                 <Header
                     userMoney = {userMoney}/>
                 <Routes>
-                    <Route path='/react-course' element={<MainPage 
-                        setUserMoney={setUserMoney} 
-                        data ={data} 
-                        setData = {setData}
-                        setWinText = {setWinText}
-                        timeout = {timeOut}
-                        userMoney = {userMoney}/>}/>
-                    <Route path='/add' element={<AddWindow 
-                        makeObj = {makeObj}
-                        setWinText = {setWinText}/>}/>
+                    <Route 
+                        path='/react-course' 
+                        element={<MainPage 
+                            setUserMoney={setUserMoney} 
+                            data ={data} 
+                            setData = {setData}
+                            setWinText = {setWinText}
+                            timeout = {timeOut}
+                            userMoney = {userMoney}
+                            setHistory = {setHistory}
+                            history = {history}
+                            setMaxHistoryId = {setMaxHistoryId}
+                            maxHistoryId = {maxHistoryId}/>}/>
+                    <Route 
+                        path='/add' 
+                        element={<AddWindow 
+                            makeObj = {makeObj}
+                            setWinText = {setWinText}/>}/>
+                    <Route 
+                        path='/history' 
+                        element={<History
+                            history = {history}/>}/>
                 </Routes>
                 <WinTab winText={winText}/>
             </div>

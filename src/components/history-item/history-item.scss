@@ -1,0 +1,16 @@
+.history-item {
+    width: 80%;
+    height: 80px;
+    background-color: black;
+    border-radius: 15px;
+    border: 0.5px gray solid;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: black;
+    font-size: 1.5rem;
+    .history-item-bet {
+        color: #F775FF;
+        font-weight: 500;
+    }
+}

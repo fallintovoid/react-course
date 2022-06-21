@@ -11,6 +11,7 @@ const Header = ({userMoney}) => {
                     <Navbar.Brand>PARIMATCH</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link as={NavLink} to='/react-course'>Home</Nav.Link>
+                        <Nav.Link as={NavLink} to='/history'>History</Nav.Link>
                         <Nav.Link as={NavLink} to='/add'>Add</Nav.Link>
                     </Nav>
                     <Navbar.Collapse className="justify-content-end">

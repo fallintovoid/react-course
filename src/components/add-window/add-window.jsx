@@ -132,7 +132,7 @@ const AddWindow = ({makeObj}) => {
                                 style={{'textDecoration' : 'none', 
                                         'color' : 'white',
                                         'margin': '0'} }>
-                                    <p>ADD</p>
+                                    ADD
                             </Link>
                     </Button>
                 </form>
