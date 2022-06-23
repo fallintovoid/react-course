@@ -1,6 +1,6 @@
-import { Button } from "react-bootstrap"
+import { Button } from "react-bootstrap";
 import { BsTwitch } from "react-icons/bs";
-import styled from "styled-components"
+import styled from "styled-components";
 
 import './bet-list-item.scss';
 
@@ -17,19 +17,6 @@ const BetListItem = ({firstTeamName, secondTeamName, firstCo, secondCo, srcOne, 
                         {firstTeamName}
                     </div>
                 </div>
-
-                <div className="time">
-                    <div className="icon">
-                        <BsTwitch color = "purple"/>
-                    </div>
-                    <div className="date">
-                        {date}
-                    </div>
-                    <div className="time-hrs">
-                        {time}
-                    </div>
-                </div>
-
                 <div className="team-two">
                     <div className="team-img">
                         <img src = {srcTwo} alt = "img"/>
@@ -37,6 +24,18 @@ const BetListItem = ({firstTeamName, secondTeamName, firstCo, secondCo, srcOne, 
                     <div className="team-name">
                         {secondTeamName}
                     </div>
+                </div>
+            </div>
+
+            <div className="time">
+                <div className="icon">
+                    <BsTwitch color = "purple"/>
+                </div>
+                <div className="date">
+                    {date}
+                </div>
+                <div className="time-hrs">
+                    {time}
                 </div>
             </div>
             <div className="team-buttons">
@@ -49,8 +48,10 @@ const BetListItem = ({firstTeamName, secondTeamName, firstCo, secondCo, srcOne, 
 }
 
 const CustomButton = styled(Button)`
-    width: 25%;
-    height: 80%;
-`
+    height: 90%;
+    width: 33%;
+    font-size: 4vw;
+    font-weight: 700;
+`;
 
 export default BetListItem;

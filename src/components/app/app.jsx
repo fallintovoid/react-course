@@ -25,7 +25,8 @@ const App = () => {
             date: `21-06-22`,
             srcOne: 'https://d3dwep9z8m8y9r.cloudfront.net/publications/2022/06/publications-9749/preview/28598/548.jpg',
             srcTwo: 'https://pbs.twimg.com/profile_images/1516719305777426433/2xSX0HN7_400x400.jpg',
-            id: 0
+            id: 0,
+            fav: false
         }
     ]);
 
@@ -54,7 +55,8 @@ const App = () => {
                 date,
                 srcOne,
                 srcTwo,
-                id: maxId
+                id: maxId,
+                fav: false
             }
             setData(date => [...date, newObj])
         }
