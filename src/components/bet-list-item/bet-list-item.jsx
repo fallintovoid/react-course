@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
 import { BsTwitch } from "react-icons/bs";
-import styled from "styled-components";
 
 import './bet-list-item.scss';
+import styled from "styled-components";
 
 const BetListItem = ({firstTeamName, secondTeamName, firstCo, secondCo, srcOne, srcTwo, time, date, openBetWindow, id}) => {
     

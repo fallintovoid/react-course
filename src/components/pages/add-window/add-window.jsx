@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
 import { InputGroup, Form, Button } from 'react-bootstrap';
+import useInput from '../../../hooks/useInput';
 
 import './add-window.scss'
 
@@ -17,9 +17,6 @@ const AddWindow = ({makeObj}) => {
 
     useEffect(() => {
         document.title = 'Add Form';
-        return () => {
-            document.title = 'Bet List'
-        }
     }, [])
 
     return(
@@ -36,7 +33,7 @@ const AddWindow = ({makeObj}) => {
                             aria-describedby="inputGroup-sizing-default"
                             {...firstName}/>
                     </InputGroup>
-                    {firstName.error && <span style={{color: "red"}}>You must fill this gap!</span>}
+                    {firstName.error && <span style={{color: "red", margin: '0'}}>You must fill this gap!</span>}
 
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="inputGroup-sizing-default">

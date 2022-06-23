@@ -1,9 +1,9 @@
 import React from 'react'
 
-import BetList from "../bet-list/bet-list";
-import BetWindow from "../bet-window/bet-window";
+import BetList from "../../bet-list/bet-list";
+import BetWindow from "../../bet-window/bet-window";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MainPage = ({setUserMoney, data, setData, setWinText, timeout, setHistory, history, maxHistoryId, setMaxHistoryId}) => {
     
@@ -12,6 +12,10 @@ const MainPage = ({setUserMoney, data, setData, setWinText, timeout, setHistory,
     const [teamCo, setTeamCo] = useState();
     const [betValue, setBetValue] = useState('');
     const [id, setId] = useState();
+
+    useEffect(() => {
+        document.title = 'Homepage';
+    }, [])
 
     const getRandomInt = (limit) => {
         return Math.floor(Math.random() * limit)

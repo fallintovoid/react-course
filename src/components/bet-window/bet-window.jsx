@@ -1,9 +1,10 @@
 import React from 'react'
+
 import { InputGroup, Form, Button } from 'react-bootstrap'
-import styled from 'styled-components'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import "./bet-window.scss"
+import styled from 'styled-components'
 
 const BetWindow = ({teamName, teamCo, closeBetWindow, setBetValue, betValue, findWonTeam, id}) => {
   return (
