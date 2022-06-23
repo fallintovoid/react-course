@@ -28,7 +28,7 @@ const MainPage = ({setUserMoney, data, setData, setWinText, timeout, setHistory,
         setId(id);
     }
     const closeBetWindow = () => {
-        setIsBetWindow(prev => false);
+        setIsBetWindow(() => false);
         setBetValue('');
     }
 

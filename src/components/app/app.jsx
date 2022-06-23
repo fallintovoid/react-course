@@ -5,7 +5,7 @@ import History from "../pages/history/history";
 import WinTab from "../win-tab/win-tab";
 import useWinText from "../../hooks/useWinText";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,7 +15,7 @@ import './app.scss'
 const App = () => {
     const [userMoney, setUserMoney] = useState(6000);
     const [winText, setWinText, timeOut] = useWinText('');
-    const [maxId, setMaxId] = useState(3);
+    const [maxId, setMaxId] = useState(4);
     const [maxHistoryId, setMaxHistoryId] = useState(1);
     const [data, setData] = useState([
         {
